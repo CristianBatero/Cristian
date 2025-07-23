@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristian Batero - Portafolio</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Animate.css para animaciones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Typed.js para animación de tipeo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    
+    <!-- EmailJS para envío de correos -->
+     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>emailjs.init('service_aq8x4tc');</script> 
+</head>
+<body>
+    <!-- Cabecera -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="#hero">Cristian Batero</a>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#hero" class="nav-link active">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#sobre-mi" class="nav-link">Sobre Mí</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#habilidades" class="nav-link">Habilidades</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#proyectos" class="nav-link">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#experiencia" class="nav-link">Experiencia</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contacto" class="nav-link">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    
+    <!-- Sección Hero (Inicio) -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="animate__animated animate__fadeInDown">Cristian Batero</h1>
+                <h2 class="animate__animated animate__fadeInUp">Cali, Colombia | Ingeniería en Sistemas</h2>
+                <p class="slogan animate__animated animate__fadeIn">Desarrollador junior con visión de futuro</p>
+                
+                <div class="typed-container">
+                    <span id="typed" class="typed"></span>
+                </div>
+                
+                <a href="downloads/cv.pdf" class="btn-download animate__animated animate__fadeInUp" download>
+                    <i class="fas fa-download"></i> Descargar CV
+                </a>
+            </div>
+            
+            <div class="hero-image animate__animated animate__fadeIn">
+                <img src="img/avatar.png" alt="Cristian Batero">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección Sobre Mí -->
+    <section id="sobre-mi" class="about-section">
+        <div class="section-container">
+            <h2 class="section-title">Sobre Mí</h2>
+            
+            <div class="about-content">
+                <div class="about-info">
+                    <p><strong>Edad:</strong> 23 años</p>
+                    <p><strong>Carrera:</strong> Ingeniería en Sistemas</p>
+                    <p><strong>Ciudad:</strong> Cali, Colombia</p>
+                </div>
+                
+                <div class="about-story">
+                    <h3>Sobre mí</h3>
+                    <p>
+                         ¡Hola! Soy <strong>Cristian Batero</strong>, tengo 23 años y actualmente estoy estudiando
+                        <strong>Ingeniería en Sistemas</strong> en 4to semestre. Vivo en Cali, Colombia y me apasiona
+                        todo lo relacionado con la tecnología, el desarrollo web y los sistemas de red.
+                    </p>
+
+                    <h3>Mi Forma de Aprender</h3>
+                    <p>
+                        Aunque me considero un <strong>programador junior</strong>, tengo bases sólidas en lenguajes como
+                        <strong>Java, Python</strong> y desarrollo de <strong>páginas web</strong>. Muchos de mis conocimientos
+                        los he adquirido por cuenta propia, y aunque al principio no fue fácil, hoy en día me siento
+                        preparado para asumir nuevos retos en programación.
+                     </p>
+                    <p>
+                        Uno de mis proyectos más significativos fue desarrollar una <strong>aplicación VPN</strong>,
+                         basándome en una estructura existente, donde aprendí. Actualmente trabajo en el área de 
+                         <strong>Infraestructura de Datos de Internet</strong>,
+                        y también he trabajado en <strong>soporte TI</strong>, lo que me ha dado una buena base práctica.
+                    </p>
+                    <p>
+                         Me considero alguien que <strong>aprende rápido</strong>, con capacidad para adaptarse a diferentes
+                        tipos de código y llevar ideas hasta convertirlas en proyectos funcionales.
+                    </p>
+                    
+                    <h3>Mi visión como programador</h3>
+                    <p>
+                    Creo que la programación no solo se trata de escribir código, sino de aprender a
+                    <strong>resolver problemas</strong>. Me gusta enfrentarme a desafíos que me reten,
+                    me ayuden a crecer y a descubrir cosas nuevas. No tengo miedo de preguntar ni de
+                    equivocarme, porque sé que cada error me acerca a ser mejor.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección Habilidades -->
+    <section id="habilidades" class="skills-section">
+        <div class="section-container">
+            <h2 class="section-title">Habilidades</h2>
+            
+            <div class="skills-container">
+                <!-- Java -->
+                <div class="skill">
+                    <div class="skill-icon">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <h3>Java</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%;"></div>
+                    </div>
+                    <span class="skill-percentage">85%</span>
+                </div>
+                
+                <!-- Python -->
+                <div class="skill">
+                    <div class="skill-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3>Python</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%;"></div>
+                    </div>
+                    <span class="skill-percentage">70%</span>
+                </div>
+                
+                <!-- HTML -->
+                <div class="skill">
+                    <div class="skill-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3>HTML</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%;"></div>
+                    </div>
+                    <span class="skill-percentage">80%</span>
+                </div>
+                
+                <!-- CSS -->
+                <div class="skill">
+                    <div class="skill-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3>CSS</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 50%;"></div>
+                    </div>
+                    <span class="skill-percentage">50%</span>
+                </div>
+                
+                <!-- JavaScript -->
+                <div class="skill">
+                    <div class="skill-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3>JavaScript</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 60%;"></div>
+                    </div>
+                    <span class="skill-percentage">60%</span>
+                </div>
+                
+                <!-- PHP -->
+                <div class="skill">
+                    <div class="skill-icon">
+                        <i class="fab fa-php"></i>
+                    </div>
+                    <h3>PHP</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 60%;"></div>
+                    </div>
+                    <span class="skill-percentage">60%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección Proyectos -->
+    <section id="proyectos" class="projects-section">
+        <div class="section-container">
+            <h2 class="section-title">Proyectos</h2>
+            
+            <div class="projects-container" id="projectsContainer">
+                <!-- Los proyectos se cargarán dinámicamente desde projects/data.json -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección Experiencia -->
+    <section id="experiencia" class="experience-section">
+        <div class="section-container">
+            <h2 class="section-title">Experiencia</h2>
+            
+            <div class="timeline">
+                <!-- Trabajo Actual -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Infraestructura de Datos de Internet</h3>
+                        <p class="timeline-date">2023 - Presente</p>
+                        <p class="timeline-company">Empresa Actual</p>
+                        <p class="timeline-description">
+                            Responsable del mantenimiento y optimización de la infraestructura de datos, 
+                            implementación de soluciones automatizadas y soporte técnico especializado.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Trabajo Anterior -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Soporte TI</h3>
+                        <p class="timeline-date">2021 - 2023</p>
+                        <p class="timeline-company">Empresa Anterior</p>
+                        <p class="timeline-description">
+                            Encargado del soporte técnico a usuarios, resolución de incidencias, 
+                            mantenimiento de equipos y implementación de mejoras en sistemas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección Contacto -->
+    <section id="contacto" class="contact-section">
+        <div class="section-container">
+            <h2 class="section-title">Contacto</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p>
+                        ¿Tienes alguna pregunta o estás interesado en trabajar juntos?
+                        No dudes en contactarme utilizando el formulario.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>cristianbatero18@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Cali, Colombia</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <!-- Form with multiple service options -->
+                    <form id="contactForm" 
+                          action="https://formspree.io/f/xjkrdzqw" 
+                          method="POST"
+                          data-formspree="true"
+                          data-netlify="true" 
+                          netlify-honeypot="bot-field">
+                        
+                        <!-- Netlify bot field (hidden) -->
+                        <input type="hidden" name="form-name" value="contact">
+                        <div class="honeypot">
+                            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                        </div>
+                        
+                        <!-- Regular honeypot field for other services -->
+                        <input type="text" name="honeypot" class="honeypot" tabindex="-1" autocomplete="off">
+                        
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-container">
+            <div class="social-icons">
+                <a href="https://github.com/CristianBatero" target="_blank" class="social-icon" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/cristian-andres-824742361/" target="_blank" class="social-icon" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:cristianbatero18@gmail.com" class="social-icon" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            
+            <div class="copyright">
+                &copy; <span id="currentYear"></span> Cristian Batero. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/typing.js"></script>
+</body>
+</html>

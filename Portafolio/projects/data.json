@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "titulo": "Sistema de Gestión de Inventario",
+        "descripcion": "Aplicación web para gestionar inventarios de pequeñas empresas, con funcionalidades de seguimiento de productos, alertas de stock y generación de reportes.",
+        "imagen": "img/cap1.jpg",
+        "tecnologias": ["PHP", "MySQL", "JavaScript", "Bootstrap"],
+        "demo": "https://ejemplo.com/demo1",
+        "repositorio": "https://github.com/tuusuario/proyecto1"
+    },
+    {
+        "id": 2,
+        "titulo": "VPN personalizada",
+        "descripcion": "Desarrollé una aplicación VPN basada en un proyecto existente, a la cual le hice múltiples mejoras. Aprendí sobre configuraciones de red, seguridad, y el manejo de usuarios y servidores.",
+        "imagen": "img/proyecto2.jpg",
+        "tecnologias": ["Java, Android Studio"],
+        "demo": "",
+        "repositorio": "https://github.com/tuusuario/proyecto2"
+    },
+    {
+        "id": 3,
+        "titulo": "Dashboard de Monitoreo de Redes",
+        "descripcion": "Herramienta de monitoreo en tiempo real para redes empresariales, que permite visualizar el estado, detectar problemas y ver estadísticas de uso.",
+        "imagen": "img/proyecto3.jpg",
+        "tecnologias": ["Python", "Flask", "WebSockets", "Chart.js"],
+        "demo": "https://ejemplo.com/demo3",
+        "repositorio": "https://github.com/tuusuario/proyecto3"
+    },
+    {
+        "id": 4,
+        "titulo": "Aplicación de Notas con Markdown",
+        "descripcion": "Aplicación web para tomar notas con soporte para Markdown, organización por categorías y sincronización en la nube.",
+        "imagen": "img/proyecto4.jpg",
+        "tecnologias": ["HTML", "CSS", "JavaScript", "Firebase"],
+        "demo": "https://ejemplo.com/demo4",
+        "repositorio": "https://github.com/tuusuario/proyecto4"
+    }
+]

@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "titulo": "Sistema de Facturas",
+        "descripcion": "Aplicación web para gestionar inventarios de pequeñas empresas, con funcionalidades de seguimiento de productos, alertas de stock y generación de reportes.",
+        "imagen": "img/facturas.png",
+        "tecnologias": ["PHP", "MySQL", "JavaScript", "CSS"],
+        "demo": "",
+        "repositorio": "https://github.com/CristianBatero/Sistema-facturaci-n/blob/main/README.md"
+    },
+    {
+        "id": 2,
+        "titulo": "HTTP Conexión VPN",
+        "descripcion": "Desarrollé una aplicación VPN basada en un proyecto existente, a la cual le hice múltiples mejoras. Aprendí sobre configuraciones de red, seguridad, y el manejo de usuarios y servidores.",
+        "imagen": "img/ic_launcher.png",
+        "tecnologias": ["Java, Android Studio"],
+        "demo": "http://conexion.crisdev.fun/",
+        "repositorio": "https://github.com/soportecrisdev/HTTP-Conexion.git"
+    },
+    {
+        "id": 3,
+        "titulo": "Paginas webs",
+        "descripcion": "Hago páginas web para empresas, negocios y emprendedores. Me enfoco en crear sitios web atractivos y funcionales que ayuden a mejorar la presencia en línea de mis clientes.",
+        "imagen": "img/image.png",
+        "tecnologias": ["PHP", "JavaScript", "CSS", "HTML"],
+        "demo": "",
+        "repositorio": ""
+    }
+]
