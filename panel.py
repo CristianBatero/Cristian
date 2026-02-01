@@ -1,14 +1,26 @@
 import requests
 import os
 import sys
+import getpass
 # Configuración
 BASE_URL = "http://localhost:5000"
+ADMIN_PIN = "1823"
 def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
 def header():
     print("\033[96m" + "="*40)
     print("      PANEL DE ADMINISTRACIÓN ELITE")
     print("="*40 + "\033[0m")
+def login():
+    clear()
+    header()
+    print("\033[93m🔒 ACCESO RESTRINGIDO\033[0m")
+    pin = getpass.getpass("Introduce el PIN de Administrador: ")
+    if pin == ADMIN_PIN:
+        return True
+    else:
+        print("\033[91mPIN Incorrecto.\033[0m")
+        return False
 def menu():
     header()
     print("1. ➕ Crear / Editar Usuario")
@@ -41,7 +53,6 @@ def add_days():
     print("--- AÑADIR DÍAS ---")
     user = input("Nombre de usuario: ")
     days = input("Días a añadir: ")
-    # Para añadir días simplemente volvemos a enviar el usuario con la nueva duración
     data = {"username": user, "password": "SAME_OR_NEW_PW", "days": int(days)}
     try:
         r = requests.post(f"{BASE_URL}/admin/add", json=data)
@@ -90,12 +101,13 @@ def send_notification():
         print(f"Error: {e}")
     input("\nPresiona Enter para volver...")
 def main():
-    # Verificar si el servidor está corriendo
     try:
         requests.get(BASE_URL, timeout=2)
     except:
         print(f"\033[91mERROR: El servidor API ({BASE_URL}) no parece estar funcionando.\033[0m")
         print("Asegúrate de ejecutar 'python3 cris.py' antes de abrir el panel.")
+        sys.exit(1)
+    if not login():
         sys.exit(1)
     while True:
         clear()
