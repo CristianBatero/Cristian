@@ -30,7 +30,7 @@ def login():
     # MODO 1: LOGIN POR TOKEN (Device ID)
     # ---------------------------
     if 'token' in data:
-        token = data['token']
+        token = data['token'].strip() # LIMPIAR ESPACIOS ACCIDENTALES
         # En este modo, el 'username' en la BD es el Token
         conn = sqlite3.connect(DB_NAME)
         c = conn.cursor()
@@ -40,24 +40,27 @@ def login():
         
         if user:
             # Token encontrado. Verificar expiración.
-            expiry_date = datetime.strptime(user[0], '%Y-%m-%d')
-            # Sumar 1 dia para que expire al final del dia
-            if expiry_date + timedelta(days=1) > datetime.now():
-                return jsonify({
-                    "success": True,
-                    "is_premium": bool(user[1]),
-                    "expiry": user[0],
-                    "message": f"Bienvenido {user[2] or 'Token User'}"
-                })
-            else:
-                return jsonify({"success": False, "message": "Tu Token ha expirado."})
+            try:
+                expiry_date = datetime.strptime(user[0], '%Y-%m-%d')
+                # Permitir acceso hasta el final del dia
+                if expiry_date + timedelta(days=1) > datetime.now():
+                    return jsonify({
+                        "success": True,
+                        "is_premium": bool(user[1]),
+                        "expiry": user[0],
+                        "message": f"Bienvenido {user[2] or 'Token User'}"
+                    })
+                else:
+                    return jsonify({"success": False, "message": "Tu Token ha expirado."})
+            except Exception as e:
+                return jsonify({"success": False, "message": f"Error en fecha: {str(e)}"})
         else:
             return jsonify({"success": False, "message": "Este dispositivo no está registrado."})
     # ---------------------------
     # MODO 2: LOGIN POR USUARIO / PASSWORD
     # ---------------------------
-    username = data.get('username')
-    password = data.get('password')
+    username = data.get('username', '').strip()
+    password = data.get('password', '').strip()
     
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
@@ -66,24 +69,27 @@ def login():
     conn.close()
     
     if user and user[0] == hash_password(password):
-        expiry_date = datetime.strptime(user[1], '%Y-%m-%d')
-        if expiry_date + timedelta(days=1) > datetime.now():
-            return jsonify({
-                "success": True,
-                "is_premium": bool(user[2]),
-                "expiry": user[1]
-            })
-        else:
-            return jsonify({"success": False, "message": "Tu cuenta ha expirado."})
+        try:
+            expiry_date = datetime.strptime(user[1], '%Y-%m-%d')
+            if expiry_date + timedelta(days=1) > datetime.now():
+                return jsonify({
+                    "success": True,
+                    "is_premium": bool(user[2]),
+                    "expiry": user[1]
+                })
+            else:
+                return jsonify({"success": False, "message": "Tu cuenta ha expirado."})
+        except:
+             return jsonify({"success": False, "message": "Error en formato de fecha."})
     
     return jsonify({"success": False, "message": "Credenciales inválidas."})
 @app.route('/admin/add', methods=['POST'])
 def add_user():
     data = request.json
-    username = data.get('username') # Puede ser User o Token
-    password = data.get('password') # Puede ser pass o vacio (si es token)
+    username = data.get('username', '').strip() # Token o Usuario sin espacios
+    password = data.get('password', '').strip() 
     days = data.get('days', 30)
-    alias = data.get('alias', '') # Nombre real del cliente
+    alias = data.get('alias', '').strip() 
     
     expiry = (datetime.now() + timedelta(days=days)).strftime('%Y-%m-%d')
     p_hash = hash_password(password) if password else "TOKEN_USER"
@@ -91,12 +97,12 @@ def add_user():
     try:
         conn = sqlite3.connect(DB_NAME)
         c = conn.cursor()
-        # Insertar o Reemplazar (para actualizar dias facilmente)
+        # Insertar o Reemplazar
         c.execute("INSERT OR REPLACE INTO users (username, password_hash, expiry_date, is_premium, alias) VALUES (?, ?, ?, 1, ?)", 
                   (username, p_hash, expiry, alias))
         conn.commit()
         conn.close()
-        return jsonify({"success": True, "message": f"Usuario/Token guardado. Vence: {expiry}"})
+        return jsonify({"success": True, "message": f"Guardado correctamente. Vence: {expiry}"})
     except Exception as e:
         return jsonify({"success": False, "message": str(e)})
 @app.route('/admin/users', methods=['GET'])
@@ -119,5 +125,5 @@ def list_users():
     return jsonify(result)
 if __name__ == '__main__':
     init_db()
-    print("🚀 Servidor VPS Auth Iniciado en puerto 5000")
+    print("🚀 Servidor Auth Iniciado")
     app.run(host='0.0.0.0', port=5000)
