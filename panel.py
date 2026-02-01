@@ -1,110 +1,83 @@
-import requests
-import os
-import sys
-import getpass
-# Configuración
+import requests, os, sys, getpass
 BASE_URL = "http://localhost:5000"
 ADMIN_PIN = "1823"
-def clear():
-    os.system('clear' if os.name == 'posix' else 'cls')
+def clear(): os.system('clear' if os.name == 'posix' else 'cls')
 def header():
-    print("\033[96m" + "="*40)
-    print("      PANEL DE ADMINISTRACIÓN ELITE")
-    print("="*40 + "\033[0m")
-def login():
-    clear()
-    header()
-    print("\033[93m🔒 ACCESO RESTRINGIDO\033[0m")
-    pin = getpass.getpass("Introduce el PIN de Administrador: ")
-    if pin == ADMIN_PIN:
-        return True
-    else:
-        print("\033[91mPIN Incorrecto.\033[0m")
-        return False
+    print("\033[96m" + "="*45)
+    print("      PANEL DE ADMINISTRACIÓN ELITE V3")
+    print("="*45 + "\033[0m")
 def menu():
     header()
-    print("1. ➕ Crear / Editar Usuario (Password)")
+    print("1. ➕ Crear / Editar Usuario (Email/Pass)")
     print("2. 📱 Registrar Usuario por TOKEN (ID)")
-    print("3. ⏳ Añadir Días (Renovar)")
-    print("4. ❌ Borrar Usuario/Token")
-    print("5. 📋 Listar Todos")
+    print("3. ⏳ Añadir Días (Renovación)")
+    print("4. ❌ Borrar Usuario o Token")
+    print("5. 📋 Listar Todos los Registros")
+    print("6. 📧 Enviar Notificación a un Usuario")
+    print("7. 📢 Notificación a TODOS (Broadcast)")
     print("0. 🚪 Salir")
-    print("\033[96m" + "-"*40 + "\033[0m")
+    print("\033[96m" + "-"*45 + "\033[0m")
     return input("Selecciona una opción: ")
 def add_user():
-    clear()
-    header()
-    print("--- CREAR USUARIO CON CONTRASEÑA ---")
-    user = input("Nombre de usuario: ").strip() # Limpiar espacios
-    pw = input("Contraseña: ").strip()
-    days = input("Días de acceso (defecto 30): ").strip() or "30"
-    
-    data = {"username": user, "password": pw, "days": int(days)}
-    try:
-        r = requests.post(f"{BASE_URL}/admin/add", json=data)
-        print("\n" + r.json().get('message', 'Error'))
-    except Exception as e:
-        print(f"Error: {e}")
-    input("\nPresiona Enter para volver...")
-def add_token_user():
-    clear()
-    header()
-    print("--- REGISTRAR USUARIO POR TOKEN (ID) ---")
-    print("Copia el ID que la app muestra en 'Token Mode'")
-    token = input("Token (Device ID): ").strip() # LIMPIAR ESPACIOS
-    alias = input("Nombre del Cliente (Alias/Referencia): ").strip()
-    days = input("Días de acceso (defecto 30): ").strip() or "30"
-    
-    data = {"username": token, "password": "", "days": int(days), "alias": alias}
-    try:
-        r = requests.post(f"{BASE_URL}/admin/add", json=data)
-        print("\n" + r.json().get('message', 'Error'))
-    except Exception as e:
-        print(f"Error: {e}")
-    input("\nPresiona Enter para volver...")
+    clear(); header(); print("--- CREAR/EDITAR POR PASSWORD ---")
+    u = input("Usuario: ").strip(); p = input("Password: ").strip(); d = input("Días (30): ").strip() or "30"
+    r = requests.post(f"{BASE_URL}/admin/add", json={"username":u,"password":p,"days":int(d)})
+    print("\n" + r.json().get('message','Error'))
+    input("\nEnter...")
+def add_token():
+    clear(); header(); print("--- REGISTRAR POR TOKEN (ID) ---")
+    t = input("Token (Device ID): ").strip(); a = input("Alias (Nombre): ").strip(); d = input("Días (30): ").strip() or "30"
+    r = requests.post(f"{BASE_URL}/admin/add", json={"username":t,"password":"","days":int(d),"alias":a})
+    print("\n" + r.json().get('message','Error'))
+    input("\nEnter...")
 def add_days():
-    clear()
-    header()
-    print("--- AÑADIR DÍAS ---")
-    user = input("Usuario o Token a renovar: ").strip()
-    days = input("Días a añadir: ").strip()
-    data = {"username": user, "days": int(days)} 
-    try:
-        r = requests.post(f"{BASE_URL}/admin/add", json=data)
-        print("\n" + r.json().get('message', 'Error'))
-    except Exception as e:
-        print(f"Error: {e}")
-    input("\nPresiona Enter para volver...")
+    clear(); header(); print("--- RENOVAR DÍAS ---")
+    u = input("Usuario o Token: ").strip(); d = input("Días a sumar: ").strip()
+    r = requests.post(f"{BASE_URL}/admin/add", json={"username":u,"days":int(d)})
+    print("\n" + r.json().get('message','Error'))
+    input("\nEnter...")
+def delete_user():
+    clear(); header(); print("--- ELIMINAR USUARIO/TOKEN ---")
+    u = input("Usuario o Token a borrar: ").strip()
+    if input(f"¿Borrar {u}? (s/n): ").lower() == 's':
+        r = requests.post(f"{BASE_URL}/admin/delete", json={"username":u})
+        print("\n" + r.json().get('message','Error'))
+    input("\nEnter...")
 def list_users():
-    clear()
-    header()
-    print("--- LISTADO DE USUARIOS ---")
-    try:
-        r = requests.get(f"{BASE_URL}/admin/users")
-        users = r.json()
-        print(f"{'USUARIO/TOKEN':<20} | {'ALIAS':<15} | {'EXPIRA':<12}")
-        print("-" * 60)
-        for u in users:
-            alias = u.get('alias', '')
-            print(f"{u['username']:<20} | {alias:<15} | {u['expiry']:<12}")
-    except Exception as e:
-        print(f"Error: {e}")
-    input("\nPresiona Enter para volver...")
+    clear(); header(); print("--- LISTADO GENERAL ---")
+    r = requests.get(f"{BASE_URL}/admin/users")
+    users = r.json()
+    print(f"{'USUARIO/TOKEN':<22} | {'ALIAS':<12} | {'EXPIRA'}")
+    print("-" * 50)
+    for u in users:
+        print(f"{u['username']:<22} | {u.get('alias',''):<12} | {u['expiry_date']}")
+    input("\nEnter...")
+def send_notification(broadcast=False):
+    clear(); header()
+    if broadcast:
+        print("--- NOTIFICACIÓN A TODOS ---")
+        target = "all"
+    else:
+        print("--- NOTIFICACIÓN PRIVADA ---")
+        target = input("Usuario/Token destino: ").strip()
+    
+    msg = input("Mensaje: ").strip()
+    if msg:
+        r = requests.post(f"{BASE_URL}/admin/notify", json={"target": target, "message": msg})
+        if r.status_code == 200: print("\n✅ Enviado con éxito.")
+    input("\nEnter...")
 def main():
-    try:
-        requests.get(BASE_URL, timeout=2)
-    except:
-        print(f"\033[91mERROR: El servidor API ({BASE_URL}) no parece estar funcionando.\033[0m")
-        sys.exit(1)
-    if not login(): sys.exit(1)
+    pin = getpass.getpass("PIN Admin: ")
+    if pin != ADMIN_PIN: sys.exit(0)
     while True:
         clear()
-        choice = menu()
-        if choice == '1': add_user()
-        elif choice == '2': add_token_user()
-        elif choice == '3': add_days()
-        elif choice == '5': list_users()
-        elif choice == '0': break
-        else: input("Opción inválida...")
-if __name__ == '__main__':
-    main()
+        c = menu()
+        if c == '1': add_user()
+        elif c == '2': add_token()
+        elif c == '3': add_days()
+        elif c == '4': delete_user()
+        elif c == '5': list_users()
+        elif c == '6': send_notification(False)
+        elif c == '7': send_notification(True)
+        elif c == '0': break
+if __name__ == '__main__': main()
