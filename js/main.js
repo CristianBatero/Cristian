@@ -601,3 +601,5 @@ window.PortfolioApp = {
     mostrarMensaje,
     animateSkillBars,
     loadProjects,
+    initSkillTilt
+};
